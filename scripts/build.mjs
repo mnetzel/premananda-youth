@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist");
+const basePath = (process.env.SITE_BASE || "").replace(/\/$/, "");
 const pages = JSON.parse(fs.readFileSync(path.join(root, ".migration/pages.json"), "utf8"));
 const posts = JSON.parse(fs.readFileSync(path.join(root, ".migration/posts.json"), "utf8"));
 const categories = JSON.parse(fs.readFileSync(path.join(root, ".migration/categories.json"), "utf8"));
@@ -334,7 +335,10 @@ function simplePage({ title, slug, current, eyebrow = "Premananda Youth", extra 
 function writePage(route, html) {
   const directory = route ? path.join(output, route) : output;
   fs.mkdirSync(directory, { recursive: true });
-  fs.writeFileSync(path.join(directory, "index.html"), html);
+  const deployableHtml = basePath
+    ? html.replace(/(href|src)="\//g, `$1="${basePath}/`)
+    : html;
+  fs.writeFileSync(path.join(directory, "index.html"), deployableHtml);
 }
 
 fs.rmSync(output, { recursive: true, force: true });
@@ -449,13 +453,13 @@ for (const category of categories.filter((item) => item.count > 0)) {
   );
 }
 
-fs.writeFileSync(path.join(output, "CNAME"), "premananda-youth.org\n");
-fs.writeFileSync(
-  path.join(output, "404.html"),
-  layout({
+const notFoundHtml = layout({
     title: "Page not found",
     content: `<section class="page-hero"><p class="eyebrow">404</p><h1>This page wandered off.</h1><p>Let’s bring you back to the community.</p><a class="button" href="/">Go to the homepage</a></section>`,
-  }),
+  });
+fs.writeFileSync(
+  path.join(output, "404.html"),
+  basePath ? notFoundHtml.replace(/(href|src)="\//g, `$1="${basePath}/`) : notFoundHtml,
 );
 
 console.log(`Built ${posts.length + pages.length + categories.filter((item) => item.count > 0).length + 5} pages in dist/`);
