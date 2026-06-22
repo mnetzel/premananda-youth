@@ -52,18 +52,16 @@ button, input, textarea { font: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(1180px, calc(100% - 40px));
+  width: min(800px, calc(100% - 40px));
   min-height: 76px;
   margin: auto;
 }
 .brand-small {
   display: flex;
   align-items: center;
-  gap: .7rem;
   text-decoration: none;
-  font-weight: 700;
 }
-.brand-small img { width: 34px; height: 34px; object-fit: contain; }
+.brand-small img { width: 190px; height: 48px; object-fit: contain; object-position: left center; }
 .site-nav { display: flex; align-items: center; gap: 2rem; }
 .site-nav a {
   position: relative;
@@ -284,7 +282,7 @@ button, input, textarea { font: inherit; }
   background: #102a35;
   color: #bfd0d6;
 }
-.site-footer img { width: 280px; filter: brightness(0) invert(1); opacity: .9; }
+.site-footer img { width: 280px; }
 .site-footer > div:first-child p { max-width: 480px; }
 .footer-links { display: grid; align-content: start; gap: .7rem; }
 .footer-links a { color: #fff; text-decoration: none; }
@@ -303,7 +301,7 @@ button, input, textarea { font: inherit; }
 
 @media (max-width: 720px) {
   .nav-shell { min-height: 66px; }
-  .brand-small span { display: none; }
+  .brand-small img { width: 155px; height: 42px; }
   .menu-button { display: block; }
   #main-menu {
     position: absolute;

@@ -167,8 +167,7 @@ function layout({ title, current, content, description = SITE.description, bodyC
   <header class="site-header">
     <div class="nav-shell">
       <a class="brand-small" href="/" aria-label="Premananda Youth home">
-        <img src="/uploads/2017/10/cropped-logo-1.png" alt="">
-        <span>Premananda Youth</span>
+        <img src="/uploads/2017/10/cropped-new_logo_design-2.png" alt="">
       </a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-menu">Menu</button>
       <div id="main-menu">${nav(current)}</div>
