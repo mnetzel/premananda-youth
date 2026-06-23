@@ -26,8 +26,6 @@ jobs:
         with:
           node-version: 22
       - run: npm run build
-        env:
-          SITE_BASE: /premananda-youth
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
